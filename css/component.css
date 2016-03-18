@@ -1,0 +1,11 @@
+.text {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  resize: none;
+}
+
+.viewport{
+  height: 100%;
+  width: 100%;
+}
