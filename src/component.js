@@ -4,10 +4,12 @@ import ReactDom from 'react-dom'
 import classnames from 'classnames'
 import autobind from 'autobind-decorator'
 import styles from '../css/component.css'
-import { Modal, Button } from 'react-bootstrap'
+import { Modal, Button, Input, ButtonInput, Tabs, Tab } from 'react-bootstrap'
 import NewComponentConfig from './new-component-modal'
 import echarts from 'echarts'
 import $ from 'jquery'
+
+const toJSON = (val) => JSON.stringify(val, null, 4)
 
 @autobind
 class echartsComponent extends React.Component {
@@ -19,7 +21,7 @@ class echartsComponent extends React.Component {
     , chartdata: this.props.data.chartdata
     , basecolor: this.props.data.basecolor
     , mapopt: this.props.data.mapopt
-    , geoJson: null
+    // , geoJson: null
     }
     const geoUrl = 'http://localhost:3000/components/echarts/mapdata/'
                     + this.state.region + '.json'
@@ -159,7 +161,32 @@ class echartsComponent extends React.Component {
             <Modal.Title >地图配置</Modal.Title>
           </Modal.Header>
           <Modal.Body >
-            Config goes here
+            <Tabs defaultActiveKey={1}>
+                <Tab eventKey={1} title="基础设置">
+                  <form >
+                    <Input type="select" label="选择地区" ref="region"
+                                defaultValue={this.state.region}>
+                         <option value="worldmap">世界</option>
+                         <option value="china">中国</option>
+                         <option value="sichuan">四川</option>
+                         <option value="gansu">甘肃</option>
+                         <option value="guangxi">广西</option>
+                    </Input>
+                  </form>
+                </Tab>
+                <Tab eventKey={2} title="地图样式">
+                  <div >
+                      <Input type="textarea" label="测试数据" ref="mapopt" rows="10"
+                        defaultValue={this.state.mapopt}/>
+                 </div>
+                </Tab>
+                <Tab eventKey={3} title="城市标点数据" >
+                <Input type="text" label="API Url" ref="url" />
+                <Input type="textarea" label="测试数据" ref="chartdata" rows="10"
+                      defaultValue={this.state.chartdata}/>
+                </Tab>
+
+            </Tabs>
           </Modal.Body>
           <Modal.Footer >
             <Button onClick={this.closeConfig}>取消</Button>
@@ -176,7 +203,10 @@ class echartsComponent extends React.Component {
   toJson() {
     // return the data you want to save as an object
     return {
-      content: this.state.content
+      region: this.state.region
+      , mapopt: this.state.mapopt
+      , chartdata: this.state.chartdata
+//      , basecolor: this.state.basecolor
     }
   }
 
@@ -184,12 +214,18 @@ class echartsComponent extends React.Component {
     this.setState({
       showConfig: true
     })
+    console.log(this.state)
   }
 
   closeConfig() {
     this.setState({
       showConfig: false
+      , region: this.refs.region.getValue()
+      , chartdata: this.refs.chartdata.getValue()
+//      , basecolor: this.state.basecolor
+      , mapopt: this.refs.mapopt.getValue()
     })
+    console.log(this.state)
   }
 
   _applyConfig() {
