@@ -41,10 +41,6 @@ class NewComponentModal extends React.Component {
           <Tabs defaultActiveKey={1}>
               <Tab eventKey={1} title="基础设置">
                 <form >
-                  <Input type="number" label="初始X坐标" min="50" max="300"
-                              defaultValue="50" ref="x"/>
-                  <Input type="number" label="初始Y坐标" min="50" max="300"
-                              defaultValue="50" ref="y"/>
                   <Input type="number" label="地图宽度" defaultValue="400" ref="w"/>
                   <Input type="number" label="地图高度" defaultValue="400" ref="h"/>
                   <Input type="select" label="选择地区" ref="region"
@@ -114,10 +110,10 @@ class NewComponentModal extends React.Component {
     }
 
     const info = {
-      x: parseInt(this.refs.x.getValue(), 5)
-    , y: parseInt(this.refs.y.getValue(), 5)
-    , w: parseInt(this.refs.w.getValue(), 5)
-    , h: parseInt(this.refs.h.getValue(), 5)
+      x: 20
+    , y: 20
+    , w: parseInt(this.refs.w.getValue(), 10)
+    , h: parseInt(this.refs.h.getValue(), 10)
     , rotate: 0
     , type: 'echarts'
     , data: {
@@ -128,7 +124,7 @@ class NewComponentModal extends React.Component {
        , basecolor: this.state.basecolor
     }
     }
-    // console.log(info.data.mapstyle)
+    console.log(info)
     this.props.actions.newComponent(info)
     this.close()
   }

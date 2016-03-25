@@ -26,6 +26,8 @@ class echartsComponent extends React.Component {
     , isUpdate: false
     , mapconfig: ''
     , geoJson: null
+    , sizew: this.props.w
+    , sizeh: this.props.h
     }
   }
 
@@ -39,23 +41,32 @@ class echartsComponent extends React.Component {
 
   componentDidUpdate() {
     if (this.state.isUpdate) {
-      console.log('Map config update.' + this.state.geoJson)
+      console.log('Map config update.')
+      this._initMap()
       this._updateMap()
       this.setState({ isUpdate: false })
     }
+
+    // resize map cause map redraw
+    if (this.state.sizew !== this.props.w) {
+      // console.log(this.props.w)
+      this._initMap()
+      this._updateMap()
+      this.state.sizew = this.props.w
+    }
   }
 
-  // onDragEnd() {
-  //   if (this.state.geoJson)
-  //     this._drawChart()
-  // }
+  onDragEnd() {
+    if (this.state.geoJson)
+      this._drawMap()
+  }
+
   async _drawMap() {
     try {
-      console.log('loading...' + this.state.region)
+      console.log('loading...' + this.url(this.state.region))
       const json = await this._getJSON(this.url(this.state.region))
       this.setState({
         geoJson: json
-        , isUpdate: false
       })
       this._initMap()
       this._updateMap()
@@ -69,7 +80,7 @@ class echartsComponent extends React.Component {
     return new Promise(function (resolve, reject) {
       $.getJSON(url)
       .done(function (result) {
-        console.log(result)
+        // console.log(result)
         resolve(result)
       })
       .fail(function () {
@@ -87,7 +98,7 @@ class echartsComponent extends React.Component {
   _initMap() {
     echarts.registerMap(this.state.region, this.state.geoJson)
     Mapchart = echarts.init(ReactDom.findDOMNode(this.refs.chart))
-    console.log('init:' + Mapchart)
+    // console.log('init:' + Mapchart)
   }
 
   _updateMap() {
@@ -176,7 +187,7 @@ class echartsComponent extends React.Component {
       // }
       ]
     }
-    console.log(this.state.mapconfig)
+    // console.log(this.state.mapconfig)
     Mapchart.setOption(this.state.mapconfig)
   }
 
@@ -224,8 +235,6 @@ class echartsComponent extends React.Component {
             <Button onClick={this._applyConfig}>确认</Button>
           </Modal.Footer>
         </Modal>
-
-        <h1 style={ { textAlign: 'center' } }>{this.state.content}</h1>
 
       </div>
     )
