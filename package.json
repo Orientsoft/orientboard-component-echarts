@@ -20,6 +20,7 @@
     "jquery": "^2.2.1",
     "react": "^0.14.3",
     "react-bootstrap": "^0.28.1",
+    "react-color": "^2.0.0",
     "react-colors-picker": "^2.3.0",
     "superagent": "^1.8.0"
   },

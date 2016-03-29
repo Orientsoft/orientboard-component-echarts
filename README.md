@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # orientboard-component-echarts
    Baidu echarts component for react-orientboard
 
@@ -46,4 +45,3 @@
   ```
 =======
 # orientboard-component-echarts
->>>>>>> 95db987126892c677ccd1a0f49d3360d513862ef

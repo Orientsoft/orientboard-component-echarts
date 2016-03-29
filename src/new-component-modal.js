@@ -1,7 +1,8 @@
 import React from 'react'
 import autobind from 'autobind-decorator'
+import styles from '../css/component.css'
 import { Modal, Button, Input, ButtonInput, Tabs, Tab } from 'react-bootstrap'
-
+import ColorPicker from 'react-color'
 
 @autobind
 class NewComponentModal extends React.Component {
@@ -57,6 +58,8 @@ class NewComponentModal extends React.Component {
                 <div >
                     <Input type="textarea" label="测试数据" ref="mapopt" rows="10"
                               defaultValue={defaultopt}/>
+                    <ColorPicker positionCSS={styles.colorpicker}
+                              display={ true } type="swatches" />
                </div>
               </Tab>
               <Tab eventKey={3} title="城市标点数据" >

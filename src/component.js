@@ -11,7 +11,7 @@ import echarts from 'echarts'
 import $ from 'jquery'
 
 const toJSON = (val) => JSON.stringify(val, null, 4)
-let Mapchart = null
+const Mapchart = null
 
 @autobind
 class echartsComponent extends React.Component {
@@ -50,8 +50,8 @@ class echartsComponent extends React.Component {
     // resize map cause map redraw
     if (this.state.sizew !== this.props.w) {
       // console.log(this.props.w)
-      this._initMap()
-      this._updateMap()
+      this.Mapchart.resize()
+      // this._updateMap()
       this.state.sizew = this.props.w
     }
   }
@@ -97,7 +97,7 @@ class echartsComponent extends React.Component {
 
   _initMap() {
     echarts.registerMap(this.state.region, this.state.geoJson)
-    Mapchart = echarts.init(ReactDom.findDOMNode(this.refs.chart))
+    this.Mapchart = echarts.init(ReactDom.findDOMNode(this.refs.chart))
     // console.log('init:' + Mapchart)
   }
 
@@ -188,7 +188,7 @@ class echartsComponent extends React.Component {
       ]
     }
     // console.log(this.state.mapconfig)
-    Mapchart.setOption(this.state.mapconfig)
+    this.Mapchart.setOption(this.state.mapconfig)
   }
 
   render() {
