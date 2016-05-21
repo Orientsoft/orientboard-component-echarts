@@ -10,8 +10,16 @@
   width: 100%;
 }
 
-.colorpicker{
-      position: below;
-      top: 50px;
-      left: 20px;
+.color{
+  width: 36px;
+  height: 14px;
+  borderRadius: 2px;
+}
+
+.swatch{
+  padding: 5px;
+  background: #fff;
+  borderRadius: 1px;
+  display: inline-block;
+  cursor: pointer;
 }

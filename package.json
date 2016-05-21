@@ -22,6 +22,7 @@
     "react-bootstrap": "^0.28.1",
     "react-color": "^2.0.0",
     "react-colors-picker": "^2.3.0",
+    "react-input-color": "git+https://github.com/wangzuo/react-input-color.git",
     "superagent": "^1.8.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
-var fs = require('fs-extra')
+const fs = require('fs-extra')
   , path = require('path')
 
-var pkg = fs.readJsonSync(path.join(__dirname, 'package.json'))
+const pkg = fs.readJsonSync(path.join(__dirname, 'package.json'))
 
 module.exports = [
   { type: pkg.orientboard.name

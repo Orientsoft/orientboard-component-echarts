@@ -2,7 +2,7 @@ import React from 'react'
 import autobind from 'autobind-decorator'
 import styles from '../css/component.css'
 import { Modal, Button, Input, ButtonInput, Tabs, Tab } from 'react-bootstrap'
-import ColorPicker from 'react-color'
+import { SketchPicker } from 'react-color'
 
 @autobind
 class NewComponentModal extends React.Component {
@@ -10,8 +10,27 @@ class NewComponentModal extends React.Component {
     super(props)
     this.state = {
       show: false
-      , basecolor: '#36c'
+      , baseColor: '#36c'
+      , areaColor: '#36c'
+      , boardColor: '#36c'
+      , highlightColor: '#36c'
+      , displayColorPicker: false
     }
+  }
+
+  handleClick() {
+
+  }
+
+  handleClose() {
+    this.setState({
+      displayColorPicker: false
+    })
+  }
+
+  handleChange(colors) {
+    // this.currentcolor = color.hex
+    console.log('onChange' + colors)
   }
 
   render() {
@@ -30,6 +49,18 @@ class NewComponentModal extends React.Component {
             , { name: '海门', value: [121.15, 31.89, 279] }
             , { name: '德州', value: [116.29, 37.45, 279] }]
             , null, 4)
+
+    const popover = {
+      position: 'absolute'
+      , zIndex: '2'
+    }
+    const cover = {
+      position: 'fixed'
+      , top: '0'
+      , right: '0'
+      , bottom: '0'
+      , left: '0'
+    }
 
     // console.log(defaultopt)
     return (
@@ -55,12 +86,17 @@ class NewComponentModal extends React.Component {
                 </form>
               </Tab>
               <Tab eventKey={2} title="地图样式">
-                <div >
-                    <Input type="textarea" label="测试数据" ref="mapopt" rows="10"
+                <div className="row">
+                  <div className="col-lg-7">
+                    <Input type="textarea" label="地图样式数据" ref="mapopt" rows="15"
                               defaultValue={defaultopt}/>
-                    <ColorPicker positionCSS={styles.colorpicker}
-                              display={ true } type="swatches" />
+                  </div>
+                  <div className="col-lg-4">
+                    <span> 取色器 </span>
+                    <SketchPicker />
+                  </div>
                </div>
+
               </Tab>
               <Tab eventKey={3} title="城市标点数据" >
               <Input type="text" label="API Url" ref="url" />

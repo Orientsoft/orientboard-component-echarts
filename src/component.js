@@ -6,6 +6,7 @@ import autobind from 'autobind-decorator'
 import styles from '../css/component.css'
 import { Modal, Button, Input, ButtonInput, Tabs, Tab } from 'react-bootstrap'
 import NewComponentConfig from './new-component-modal'
+import { SketchPicker } from 'react-color'
 
 import echarts from 'echarts'
 import $ from 'jquery'
@@ -217,10 +218,17 @@ class echartsComponent extends React.Component {
                   </form>
                 </Tab>
                 <Tab eventKey={2} title="地图样式">
-                  <div >
-                      <Input type="textarea" label="测试数据" ref="mapopt" rows="10"
+                  <div className="row">
+                    <div className="col-lg-7">
+                      <Input type="textarea" label="测试数据" ref="mapopt" rows="15"
                         defaultValue={this.state.mapopt}/>
                  </div>
+                 <div className="col-lg-4">
+                   <h5> 取色器 </h5>
+                   <SketchPicker />
+                 </div>
+               </div>
+
                 </Tab>
                 <Tab eventKey={3} title="城市标点数据" >
                 <Input type="text" label="API Url" ref="url" />
